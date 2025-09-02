@@ -36,5 +36,9 @@ async fn main() -> anyhow::Result<()> {
     let count = actor_ref.ask(Message::Inc { amount: 42 }).await?;
     assert_eq!(count, Response::Value { amount: 42 });
 
+    let actor_ref_clone = actor_ref.clone();
+    let count = actor_ref_clone.ask(Message::Inc { amount: 58 }).await?;
+    assert_eq!(count, Response::Value { amount: 100 });
+
     Ok(())
 }
